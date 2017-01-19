@@ -1,6 +1,7 @@
 package com.poet.chain.test;
 
 import com.chain.api.Account;
+import com.chain.api.ControlProgram;
 import com.chain.api.MockHsm;
 import com.chain.exception.ChainException;
 import com.poet.chain.BaseChainCoreTest;
@@ -44,6 +45,14 @@ public class AccountTest extends BaseChainCoreTest {
             Account account = accounts.next();
             System.out.println(account.alias + "\t\t" + account.id);
         }
+    }
+    
+    @Test
+    public void createControlProgram() throws ChainException {
+        ControlProgram controlProgram = new ControlProgram.Builder()
+                .controlWithAccountByAlias("account_from_sdk")
+                .create(super.client);
+        System.out.println("create control program success,control program: " + controlProgram.controlProgram);
     }
 
 }
